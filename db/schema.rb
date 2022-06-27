@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_27_011324) do
+ActiveRecord::Schema.define(version: 2022_06_27_011959) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "customer_id", null: false
@@ -81,6 +81,18 @@ ActiveRecord::Schema.define(version: 2022_06_27_011324) do
     t.index ["genre_id"], name: "index_items_on_genre_id"
   end
 
+  create_table "order_details", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "item_id", null: false
+    t.integer "price", null: false
+    t.integer "amount", null: false
+    t.integer "making_status", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_order_details_on_item_id"
+    t.index ["order_id"], name: "index_order_details_on_order_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.string "postal_code", null: false
@@ -99,5 +111,7 @@ ActiveRecord::Schema.define(version: 2022_06_27_011324) do
   add_foreign_key "cart_items", "customers"
   add_foreign_key "cart_items", "items"
   add_foreign_key "items", "genres"
+  add_foreign_key "order_details", "items"
+  add_foreign_key "order_details", "orders"
   add_foreign_key "orders", "customers"
 end
