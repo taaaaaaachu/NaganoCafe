@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  namespace :public do
+    get 'unsubscribe', to: 'customers#unsubscribe'
+    patch 'withdraw', to: 'customers#withdraw'
+  end
   scope module: :public do
     root to: 'homes#top'
     get 'about', to: 'homes#about'
@@ -14,12 +19,12 @@ Rails.application.routes.draw do
         delete :destroy_all
       end
     end
-    resources :customers, only: [:show, :edit, :update] do
-      collection do
-        get :unsubscribe
-        patch :withdraw
-      end
-    end
+    # resources :customers, only: [:show, :edit, :update] do
+    #   collection do
+    #     get :unsubscribe
+    #     patch :withdraw
+    #   end
+    # end
     resources :items, only: [:index, :show]
   end
 
@@ -27,7 +32,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources :order_details, only: :update
     resources :orders, only: [:show, :update]
-    resources :customers, except: [:destroy, :create, :new]
+    # resources :customers, except: [:destroy, :create, :new]
     resources :genres, except: [:destroy, :show, :new]
     resources :items, except: :destroy
   end
