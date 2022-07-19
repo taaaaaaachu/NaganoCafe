@@ -1,2 +1,10 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
+<h3><%= @customer.first_name %><%= @customer.last_name %>さんの会員詳細</h3>
+
+会員id<%= @customer.id %>
+<%= @customer.first_name %><%= @customer.last_name %>
+<%= @customer.first_name_kana %><%= @customer.last_name_kana %>
+<%= @customer.postal_code %>
+<%= @customer.address %>
+<%= @customer.telephone_number %>
+<%= @customer.email %>
+<%= @status %>
