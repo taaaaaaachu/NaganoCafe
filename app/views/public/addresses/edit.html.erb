@@ -1,2 +1,7 @@
-<h1>Public::Addresses#edit</h1>
-<p>Find me in app/views/public/addresses/edit.html.erb</p>
+ <%= form_with model: @address do |f| %>
+    宛名<%= f.text_field :name, autofocus: true, id:"name", placeholder:"宛名"%>
+    郵便番号<%= f.text_field :postal_code, id:"postal_code", placeholder:"郵便番号"%>
+    住所<%= f.text_field :address, id:"address", placeholder:"住所"%>
+
+    <%= f.submit "変更を保存" %>
+  <% end %>
