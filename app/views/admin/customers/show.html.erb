@@ -1,10 +1,56 @@
-<h3><%= @customer.first_name %><%= @customer.last_name %>さんの会員詳細</h3>
-
-会員id<%= @customer.id %>
-<%= @customer.first_name %><%= @customer.last_name %>
-<%= @customer.first_name_kana %><%= @customer.last_name_kana %>
-<%= @customer.postal_code %>
-<%= @customer.address %>
-<%= @customer.telephone_number %>
-<%= @customer.email %>
-<%= @status %>
+<div class="container">
+  <h3 class="gray mt-5"><%= @customer.first_name %><%= @customer.last_name %>さんの会員詳細</h2>
+  <div class="row">
+    <table class="table table-borderless">
+      <thead></thead>
+      <tbody>
+        <tr>
+          <th style="width: 15%">会員ID</th>
+          <td><%= @customer.id %></td>
+        </tr>
+        <tr>
+          <th style="width: 15%">氏名</th>
+          <td><%= @customer.first_name %>　<%= @customer.last_name %></td>
+        </tr>
+        <tr>
+          <th style="width: 15%">フリガナ</th>
+          <td><%= @customer.first_name_kana %>　<%= @customer.last_name_kana %></td>
+        </tr>
+        <tr>
+          <th style="width: 15%">郵便番号</th>
+          <td><%= @customer.postal_code %></td>
+        </tr>
+        <tr>
+          <th style="width: 15%">住所</th>
+          <td><%= @customer.address %></td>
+        </tr>
+        <tr>
+          <th style="width: 15%">電話番号</th>
+          <td><%= @customer.telephone_number %></td>
+        </tr>
+        <tr>
+          <th style="width: 15%">メールアドレス</th>
+          <td><%= @customer.email %></td>
+        </tr>
+        <tr>
+          <th style="width: 15%">会員ステータス</th>
+          <td>
+            <% if @customer.is_deleted == true %>
+              <p class="text-secondary">退会</p>
+            <% else %>
+              <p class="text-success">有効</p>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <%= link_to "編集する", edit_admin_customer_path(@customer), class: 'btn btn-success' %>
+    </div>
+    <!--<div class="col-2">-->
+    <!--  <%= link_to "注文履歴一覧を見る", edit_admin_customer_path(@customer) %> -->
+    <!--</div>-->
+  </div>
+</div>

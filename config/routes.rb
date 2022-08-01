@@ -2,12 +2,15 @@ Rails.application.routes.draw do
 
   namespace :public do
 
-    get 'unsubscribe', to: 'customers#unsubscribe'
-    patch 'withdraw', to: 'customers#withdraw'
+    # get '/customer/unsubscribe', to: 'customers#unsubscribe'
+
 
   end
   scope module: :public do
     root to: 'homes#top'
+    get 'customers/unsubscribe', to: 'customers#unsubscribe'
+    patch 'customers/withdraw', to: 'customers#withdraw'
+    get "orders/confirm" => "orders#confirm"
     get     'about',                      to: 'homes#about'
     get     'customers/mypage',           to: 'customers#show'
     get     'customers/information/edit', to: 'customers#edit'

@@ -1,2 +1,44 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<div class="container">
+  <h3 class="gray mt-5"><%= @customer.first_name %><%= @customer.last_name %>さんの会員詳細</h2>
+
+    <%= form_with model: @customer, url: admin_customer_path, method: :patch do |f| %>
+  <form>
+    <div class="row mb-3">
+      <p class="col-2">氏名</p>
+      <%= f.text_field :first_name, autofocus: true, id:"first_name", placeholder:"名字", class: "col-2 ms-2" %>
+      <div class="col-1"></div>
+      <%= f.text_field :last_name, id:"last_name", placeholder:"名前", class: "col-2 ms-2" %>
+    </div>
+    <div class="row mb-3">
+      <p class="col-2">フリガナ</p>
+      <%= f.text_field :first_name_kana, autofocus: true, id:"first_name_kana", placeholder:"名字カナ" %>
+      <div class="col-1"></div>
+      <%= f.text_field :last_name_kana, id:"last_name_kana", placeholder:"名前カナ"%>
+    </div>
+    <div class="row mb-3">
+      <p class="col-2">郵便番号</p><%= f.text_field :postal_code, id:"postal_code", placeholder:"郵便番号" , class: "col-2 ms-2" %>
+    </div>
+    <div class="row mb-3">
+      <p class="col-2">住所</p><%= f.text_field :address, id:"address", placeholder:"住所" , class: "col-5 ms-2" %>
+    </div>
+    <div class="row mb-3">
+      <p class="col-2">電話番号</p><%= f.text_field :telephone_number, id:"telephone_number", placeholder:"電話番号"%>
+    </div>
+    <div class="row mb-3">
+      <p class="col-2">メールアドレス</p><%= f.text_field :email, id:"email", placeholder:"メールアドレス"%>
+    </div>
+    <div class="row mb-3 d-flex align-items-center">
+      <p class="col-2">会員ステータス</p>
+      <%= f.radio_button :is_deleted, false %>
+      <%= f.label :is_deleted, "有効" %>
+      <div class="m-2"></div>
+      <%= f.radio_button :is_deleted, true %>
+      <%= f.label :is_deleted, "退会" %>
+    </div>
+    <div class="row mb-3">
+      <%= f.submit "変更を保存", class: "btn btn-success" %>
+    </div>
+  </form>
+  <% end %>
+
+</div>
