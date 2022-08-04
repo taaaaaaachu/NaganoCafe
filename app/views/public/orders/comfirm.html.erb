@@ -1,0 +1,66 @@
+<div class="container">
+  <h3 class="gray mt-5">注文情報確認</h2>
+
+  <% @add = 0 %>
+  <div class="row justify-content-between">
+    <table class="table table-bordered col-9">
+      <thead class="table-active">
+        <tr>
+          <td>商品名</td>
+          <td>単価（税込）</td>
+          <td>数量</td>
+          <td>小計</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart_items.each do |cart_item| %>
+        <tr>
+          <th><%= cart_item.item.name %></th>
+          <td><%= cart_item.item.with_tax_price %></td>
+          <td><%= cart_item.amount %></td>
+          <td><%= cart_item.subtotal %></td>
+        </tr>
+          <% @add += cart_item.subtotal %>
+        <% end %>
+      </tbody>
+    </table>
+    <% @order.shipping_cost = 800 %>
+    <% @order.total_payment = (@order.shipping_cost + @add) %>
+    <table class="table table-bordered col-2">
+      <tr>
+        <td class="table-active">送料</td>
+        <td><%= @order.shipping_cost %></td>
+      </tr>
+      <tr>
+        <td class="table-active">商品合計</td>
+        <td><%= @add %></td>
+      </tr>
+      <tr>
+        <td class="table-active">請求金額</td>
+        <td><%= @order.total_payment %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="row mt-5">
+  <h3 class="col-2">支払い方法</h3>
+  <%= (@order.payment_method == "credit_card") ? "クレジットカード" : "銀行振り込み" %>
+  </div>
+
+  <div class="row">
+  <h3 class="col-2">お届け先</h3>  <%= @order.address_display %><br>
+  </div>
+
+
+
+  <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
+  <!--create確認用-->
+  <%= f.hidden_field :postal_code %>
+  <%= f.hidden_field :address %>
+  <%= f.hidden_field :name %>
+  <%= f.hidden_field :payment_method %>
+  <%= f.hidden_field :total_payment %>
+  <div class="row justify-content-center">
+  <%= f.submit "注文を確定する", class:"btn btn-success col-md-3 mt-5" %>
+  <% end %>
+  </div>
+</div>
