@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     patch 'customers/withdraw', to: 'customers#withdraw'
     get "orders/confirm" => "orders#confirm"
     get     'about',                      to: 'homes#about'
-    get     'customers/mypage',           to: 'customers#show'
+    get     'customers/my_page',           to: 'customers#show'
     get     'customers/information/edit', to: 'customers#edit'
     patch   'customers/information',    to: 'customers#update'
     resources :addresses, except: [:show, :new]
