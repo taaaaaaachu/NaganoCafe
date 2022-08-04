@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
-  
+
   def show
     @customer = Customer.find(current_customer.id)
     # @customer = Customer.where(id: current_customer.id)
@@ -13,7 +13,7 @@ class Public::CustomersController < ApplicationController
   def update
     @customer = Customer.find(current_customer.id)
     @customer.update(customer_params)
-    redirect_to customers_mypage_path
+    redirect_to customers_my_page_path
   end
 
   def unsubscribe
